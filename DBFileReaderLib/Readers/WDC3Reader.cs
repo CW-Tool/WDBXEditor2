@@ -377,7 +377,7 @@ namespace DBFileReaderLib.Readers
                         SparseEntries = reader.ReadArray<SparseEntry>(section.OffsetMapIDCount).ToList();
                     }
 
-                    // reference data
+                    // reference data here
                     ReferenceData refData = new ReferenceData();
                     if (section.ParentLookupDataSize > 0)
                     {
