@@ -86,7 +86,7 @@ namespace DBCD
                 var fieldType = FieldDefinitionToType(fieldDefinition, columnDefinition, localiseStrings);
                 var field = typeBuilder.DefineField(fieldDefinition.name, fieldType, FieldAttributes.Public);
 
-                columns.Add(fieldDefinition.name);
+                
 
                 if (fieldDefinition.isID)
                 {
@@ -96,8 +96,16 @@ namespace DBCD
                 if (fieldDefinition.arrLength > 1)
                 {
                     AddAttribute<CardinalityAttribute>(field, fieldDefinition.arrLength);
+                    //for (int i = 0; i < fieldDefinition.arrLength; i++)
+                    //{
+                    //    columns.Add(fieldDefinition.name + i.ToString());
+                    //}
                 }
-
+                else
+                {
+                    
+                }
+                columns.Add(fieldDefinition.name);
                 if (isLocalisedString)
                 {
                     if (localiseStrings)

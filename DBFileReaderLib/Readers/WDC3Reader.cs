@@ -275,6 +275,17 @@ namespace DBFileReaderLib.Readers
                 // column meta data
                 ColumnMeta = reader.ReadArray<ColumnMetaData>(FieldsCount);
 
+                /*
+                 * CharStartOutfit.db2 2.5.3.42328
+                 $noninline,id$ID<32>
+                    ClassID<u8>
+                    SexID<u8>
+                    OutfitID<u8>
+                    PetDisplayID<u32>
+                    PetFamilyID<u8>
+                    ItemID<32>[24]
+                    $noninline,relation$RaceID<32>
+                 */
                 // pallet data
                 PalletData = new Value32[ColumnMeta.Length][];
                 for (int i = 0; i < ColumnMeta.Length; i++)
