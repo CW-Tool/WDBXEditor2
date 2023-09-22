@@ -25,7 +25,7 @@ namespace DBFileReaderLib.Writers
         public WDC3RowSerializer(BaseWriter<T> writer)
         {
             m_writer = writer;
-            m_fieldMeta = m_writer.Meta;//not include inline item like id etc
+            m_fieldMeta = m_writer.Meta;
             m_columnMeta = m_writer.ColumnMeta;
             m_palletData = m_writer.PalletData;
             m_commonData = m_writer.CommonData;
@@ -88,26 +88,10 @@ namespace DBFileReaderLib.Writers
                 }
                 else
                 {
-                    //do not write some inline data
-                    /*
-                     * CharStartOutfit.db2 2.5.3.42328
-                     $noninline,id$ID<32>
-                        ClassID<u8>
-                        SexID<u8>
-                        OutfitID<u8>
-                        PetDisplayID<u32>
-                        PetFamilyID<u8>
-                        ItemID<32>[24]
-                        $noninline,relation$RaceID<32>
-                     */
-                    if (fieldIndex < m_fieldMeta.Length - 1)
-                    {
-                        if (simpleWriters.TryGetValue(info.Field.FieldType, out var writer))
-                            writer(id, bitWriter, m_writer, m_fieldMeta[fieldIndex], m_columnMeta[fieldIndex], m_palletData[fieldIndex], m_commonData[fieldIndex], info.Getter(row));
-                        else
-                            throw new Exception("Unhandled field type: " + typeof(T).Name);
-                    }
-
+                    if (simpleWriters.TryGetValue(info.Field.FieldType, out var writer))
+                        writer(id, bitWriter, m_writer, m_fieldMeta[fieldIndex], m_columnMeta[fieldIndex], m_palletData[fieldIndex], m_commonData[fieldIndex], info.Getter(row));
+                    else
+                        throw new Exception("Unhandled field type: " + typeof(T).Name);
                 }
             }
 

@@ -41,7 +41,7 @@ namespace DBFileReaderLib.Writers
 
             StringTable = new Dictionary<string, int>();
             CopyData = new SortedDictionary<int, int>();
-            Meta = reader.Meta;//not include inline column like ID etc
+            Meta = reader.Meta;
             ColumnMeta = reader.ColumnMeta;
             TableHash = reader.TableHash;
 
